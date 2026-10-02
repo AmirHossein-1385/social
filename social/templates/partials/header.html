@@ -1,0 +1,98 @@
+{% load static %}
+
+<header class="header">
+
+
+    <div class="header_logo">
+    <a href="{% url 'social:index' %}">
+        <img src="{% static 'images/logo/xhhTe5JQSGDNqQVrImTVuGQWm2I5ewnJ2n1yDUrkvM6YChRepmdelM-AGVFQQq6nBlsgChNRLoH6iXehWITbYZgAeVD93COfPK7VQ0r0_np7k8CJ0KIsbfd2uViDlKetVo9CM2-7mgkGd3MmKVwMUduyg1Zlr2kLEBXv-QZp7f4Knmr8YXroF2K3qsOvHBfN.jpg' %}" alt="SabzSocial">
+        <span>SabzSocial</span>
+    </a>
+    </div>
+
+
+
+    <div class="header_search">
+    <form method="get" action="{% url 'social:post_search' %}">
+        <input
+            type="text"
+            name="query"
+            placeholder="جستجوی پست..."
+        >
+        <button type="submit">
+            <img src="{% static 'svg/search.svg' %}" alt="search">
+        </button>
+    </form>
+</div>
+
+
+
+    <div class="header_user">
+
+        {% if request.user.is_authenticated %}
+
+            <a href="{% url 'social:profile'%}">
+                {% if request.user.photo %}
+                    <img
+                        src="{{ request.user.photo.url }}"
+                        alt="profile"
+                        class="header_profile_image"
+                    >
+                {% else %}
+                    <img
+                        src="{% static 'images/profile/male-user-avatar-flat-design-profile-icon-modern-vector-illustration-features-faceless-man-dark-hair-beard-406163258.webp' %}"
+                        alt="profile"
+                        class="header_profile_image"
+                    >
+                {% endif %}
+            </a>
+
+
+            <div class="user_dropdown">
+
+                <span>
+                    {{ request.user.username }}
+                </span>
+
+                <div class="dropdown_content">
+
+                    <a href="{% url 'social:profile'%}">
+                        پروفایل
+                    </a>
+
+                    <a href="{% url 'social:user_edit' %}">
+                        ویرایش پروفایل
+                    </a>
+
+                    <a href="{% url 'social:activity' %}">
+                        فعالیت‌ها
+                    </a>
+
+                    <a href="{% url 'social:ticket' %}">
+                        پشتیبانی
+                    </a>
+
+                    <a href="{% url 'social:logout' %}">
+                        خروج
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        {% else %}
+
+            <a href="{% url 'social:login' %}">
+                ورود
+            </a>
+
+            <a href="{% url 'social:register' %}">
+                ثبت نام
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</header>

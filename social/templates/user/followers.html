@@ -1,0 +1,88 @@
+{% extends 'parent/base.html' %}
+{% load thumbnail %}
+{% load static %}
+
+{% block content %}
+
+<div class="followers-container">
+
+    <div class="followers-header">
+        <div>
+            <h2>دنبال‌کنندگان</h2>
+            <p>افرادی که شما را دنبال می‌کنند</p>
+        </div>
+
+        <span class="followers-count">
+            {{ followers|length }}
+        </span>
+    </div>
+
+    {% if followers %}
+
+        <div class="followers-grid">
+
+            {% for follower in followers %}
+
+                <div class="follower-card">
+
+                    <a href="{{ follower.get_absolute_url }}" class="follower-info">
+
+                        <div class="follower-avatar">
+
+                            {% if follower.photo %}
+                                <img src="{% thumbnail follower.photo 120x120 crop %}"
+                                     alt="{{ follower.get_full_name }}">
+                            {% else %}
+                                <div class="follower-default-avatar">
+                                    {{ follower.get_full_name|first|upper }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="follower-details">
+
+                            <h3>
+                                {{ follower.get_full_name }}
+                            </h3>
+
+                            {% if follower.username %}
+                                <span>@{{ follower.username }}</span>
+                            {% endif %}
+
+                        </div>
+
+                    </a>
+
+                    <a href="{{ follower.get_absolute_url }}"
+                       class="follower-profile-btn">
+                        مشاهده پروفایل
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="followers-empty">
+
+            <div class="followers-empty-icon">
+                ♡
+            </div>
+
+            <h3>هنوز دنبال‌کننده‌ای ندارید</h3>
+
+            <p>
+                وقتی کسی شما را دنبال کند، اینجا نمایش داده می‌شود.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

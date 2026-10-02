@@ -1,0 +1,5 @@
+<p>ایا از حذف این پست اطمینان دارید؟</p>
+<form method="post" action="{% url 'social:delete_post' post.id %}">
+    {% csrf_token %}
+    <button type="submit">حذف پست</button>
+</form>

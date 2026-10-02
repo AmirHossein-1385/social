@@ -1,0 +1,93 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}
+ارسال تیکت
+{% endblock %}
+
+
+{% block content %}
+
+<div class="ticket-form-container">
+
+    <div class="ticket-form-header">
+        <h1>ارسال تیکت</h1>
+        <p>پیام خود را برای پشتیبانی ارسال کنید</p>
+    </div>
+
+
+    <form method="post" class="ticket-form">
+
+        {% csrf_token %}
+
+        <div class="ticket-fields">
+            {{ form.as_p }}
+        </div>
+
+
+        <button type="submit" class="ticket-submit-btn">
+            ثبت تیکت
+        </button>
+
+
+        {% if messages %}
+
+        <div class="message-box">
+
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+
+    </form>
+
+
+    {% if form.errors %}
+
+    <div class="form-errors">
+
+        <p>
+            لطفا خطاهای زیر را اصلاح کنید
+        </p>
+
+
+        {% for field in form %}
+
+            {% if field.errors %}
+
+                <div class="error-item">
+
+                    {{ field.label }} :
+
+                    {% for error in field.errors %}
+                        {{ error }}
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endfor %}
+
+
+    </div>
+
+    {% endif %}
+
+
+
+    {% if form.non_field_errors %}
+
+    <div class="form-errors">
+        {{ form.non_field_errors }}
+    </div>
+
+    {% endif %}
+
+
+</div>
+
+{% endblock %}

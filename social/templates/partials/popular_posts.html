@@ -1,0 +1,68 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+
+{% block title %}
+محبوب‌ترین پست‌ها
+{% endblock %}
+
+{% block content %}
+
+<div class="popular-container">
+
+    <div class="popular-header">
+        <h1>محبوب‌ترین پست‌ها</h1>
+        <p>پست‌هایی که بیشترین تعامل را داشته‌اند</p>
+    </div>
+
+
+    <div class="popular-grid">
+
+        {% for post in posts %}
+
+        <div class="popular-card">
+
+            {% if post.image %}
+                <img src="{{ post.image.url }}" class="popular-image">
+            {% endif %}
+
+
+            <div class="popular-content">
+
+                <a href="{{ post.get_absolute_url }}" class="popular-title">
+                    {{ post.description|truncatewords:20 }}
+                </a>
+
+
+                <div class="popular-info">
+
+                    <span class="popular-like">
+                        <img src="{% static 'svg/like.svg' %}">
+                        {{ post.total_likes }}
+                    </span>
+
+
+                    <span class="popular-comment">
+                        <img src="{% static 'svg/comment.svg' %}">
+                        {{ post.comments.count }}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% empty %}
+
+        <div class="empty-popular">
+            پستی وجود ندارد.
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

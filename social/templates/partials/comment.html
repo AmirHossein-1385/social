@@ -1,0 +1,26 @@
+<form method="post" action="{% url 'social:comment' post.id %}" class="comment-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">ارسال کامنت</button>
+</form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js" integrity="sha512-8LENNbXmzI/Gbj+OwXmqR6V4QaUAw0/porPzy1+dQoJqC0JPHedWoe0DDOTL2uHA5XXJyIsPtiMHH86pVlay6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function (){
+        $('.comment-form').submit(function (e){
+            e.preventDefault();
+            $.ajax({
+                type:"POST",
+                url:'{% url 'social:comment' post.id %}',
+                data:$(this).serialize(),
+                success:function (data){
+                    console.log(data);
+                    $('.comment-form')[0].reset();
+                    alert(data.message);
+                }
+            });
+        });
+    });
+
+
+</script>

@@ -1,0 +1,54 @@
+{% extends 'parent/auth_base.html' %}
+
+{% block title %}
+Register
+{% endblock %}
+
+
+{% block content %}
+
+<div class="register_container">
+
+    <form method="post" class="register_form">
+
+        {% csrf_token %}
+
+        <h2 class="register_title">
+            Create Account
+        </h2>
+
+
+        {% for field in form %}
+
+            <div class="form_group">
+
+                <label class="register_label">
+                    {{ field.label }}
+                </label>
+
+
+                {{ field }}
+
+
+                {% if field.errors %}
+
+                    <small class="form_error">
+                        {{ field.errors|striptags }}
+                    </small>
+
+                {% endif %}
+
+            </div>
+
+        {% endfor %}
+
+
+        <button type="submit" class="register_submit">
+            Sign Up
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

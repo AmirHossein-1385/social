@@ -1,0 +1,46 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django Database
+db.sqlite3
+*.sqlite3
+
+# User Uploaded Files
+images/
+media/
+
+# Environment Variables
+.env
+.env.*
+
+# IDE Settings
+.idea/
+.vscode/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Build Files
+build/
+dist/
+*.egg-info/
+
+# Temporary Files
+*.swp
+*.swo

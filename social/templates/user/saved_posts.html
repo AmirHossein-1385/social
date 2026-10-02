@@ -1,0 +1,71 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+
+{% block title %}
+پست‌های ذخیره شده
+{% endblock %}
+
+
+{% block content %}
+
+<div class="saved-posts-container">
+
+    <div class="saved-header">
+        <h1>پست‌های ذخیره شده</h1>
+        <p>پست‌هایی که ذخیره کرده‌اید</p>
+    </div>
+
+
+    <div class="saved-posts-grid">
+
+        {% for post in save %}
+
+            <div class="saved-post-card">
+
+                {% if post.image %}
+                    <a href="{{ post.get_absolute_url }}"><img src="{{ post.image.url }}" class="saved-post-image"></a>
+                {% endif %}
+
+
+                <div class="saved-post-content">
+
+                    <a href="{{ post.get_absolute_url }}" class="saved-post-title">
+                        {{ post.description|truncatewords:20 }}
+                    </a>
+
+
+                    <div class="saved-post-author">
+                        {{ post.author.get_full_name }}
+                    </div>
+
+
+                    <div class="saved-post-info">
+                        <span class="post-like">
+                            <img src="{% static 'svg/like.svg' %}">
+                            <span>{{ post.total_likes }}</span>
+                        </span>
+
+                        <span class="post-comment">
+                            <img src="{% static 'svg/comment.svg' %}">
+                            <span>{{ post.comments.count }}</span>
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        {% empty %}
+
+            <div class="empty-saved">
+                هنوز هیچ پستی ذخیره نکرده‌اید.
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

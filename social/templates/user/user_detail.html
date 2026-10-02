@@ -1,0 +1,158 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+
+{% block title %}
+کاربران
+{% endblock %}
+{% block content %}
+{% load thumbnail %}
+{% load static %}
+{% load thumbnail %}
+{% load static %}
+
+<div class="user-profile-page">
+
+    <div class="user-profile-card">
+
+        <div class="user-profile-header">
+
+            <div class="user-profile-avatar">
+                {% if user.photo %}
+                    <img src="{% thumbnail user.photo 150x0 quality=90 %}" alt="profile">
+                {% else %}
+                    <img src="{% static 'images/profile/male-user-avatar-flat-design-profile-icon-modern-vector-illustration-features-faceless-man-dark-hair-beard-406163258.webp' %}" alt="profile">
+                {% endif %}
+            </div>
+
+
+            <div class="user-profile-info">
+
+                <h1 class="user-profile-name">
+                    {{ user.get_full_name }}
+                </h1>
+
+                {% if user == request.user %}
+                    <div class="own-profile-actions">
+                        <a href="{% url 'social:user_edit' %}" class="edit-profile-btn">ویرایش پروفایل</a>
+                    </div>
+                {% else %}
+                <button class="user-profile-follow">
+                    {% if request.user in user.followers.all %}
+                        Unfollow
+                    {% else %}
+                        Follow
+                    {% endif %}
+                </button>
+{% endif %}
+
+
+            </div>
+
+        </div>
+
+
+
+        <div class="user-profile-stats">
+
+            <a href="{% url 'social:followers' user.id %}">
+                <strong>
+                    {{ user.followers.count }}
+                </strong>
+                <span>
+                    Followers
+                </span>
+            </a>
+
+
+            <a href="{% url 'social:following' user.id %}">
+                <strong>
+                    {{ user.following.count }}
+                </strong>
+                <span>
+                    Following
+                </span>
+            </a>
+
+        </div>
+
+
+
+        <div class="user-profile-details">
+
+
+            <div class="user-profile-box">
+                <h3>Bio</h3>
+                <p>
+                    {{ user.bio|default:"No bio available" }}
+                </p>
+            </div>
+
+
+            <div class="user-profile-box">
+                <h3>Job</h3>
+                <p>
+                    {{ user.job|default:"Not specified" }}
+                </p>
+            </div>
+
+
+            <div class="user-profile-box">
+                <h3>Date of birth</h3>
+                <p>
+                    {{ user.date_of_birth|default:"Not specified" }}
+                </p>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js" integrity="sha512-8LENNbXmzI/Gbj+OwXmqR6V4QaUAw0/porPzy1+dQoJqC0JPHedWoe0DDOTL2uHA5XXJyIsPtiMHH86pVlay6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+$(document).ready(function(){
+
+    $('.user-profile-follow').click(function(){
+
+        var button = $(this);
+
+        $.ajax({
+
+            type:'POST',
+
+            url:"{% url 'social:follow' user.id %}",
+
+            data:{
+                'csrfmiddlewaretoken':'{{ csrf_token }}',
+                'user_id':'{{ user.id }}',
+            },
+
+
+            success:function(data){
+
+                if(data.follow){
+                    button.text("Unfollow");
+                }
+                else{
+                    button.text("Follow");
+                }
+
+
+                $(".user-profile-stats a:first-child strong")
+                    .text(data.followers_count);
+
+
+                $(".user-profile-stats a:nth-child(2) strong")
+                    .text(data.following_count);
+
+            }
+
+        });
+
+    });
+
+});
+</script>
+{% endblock %}

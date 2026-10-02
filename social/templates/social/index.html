@@ -1,0 +1,159 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %}
+SabzSocial
+{% endblock %}
+
+
+{% block content %}
+
+<div class="home_container">
+
+    <section class="posts_section">
+
+        <h2>
+            پست‌های جدید
+        </h2>
+
+
+        {% for post in posts %}
+
+        <div class="post_card">
+
+            <div class="post_header">
+
+                <a href="#">
+                    {% if post.author.photo %}
+                        <img
+                            src="{{ post.author.photo.url }}"
+                            class="post_profile"
+                        >
+                    {% endif %}
+                </a>
+
+                <div>
+                    <span>
+                        {{ post.author.username }}
+                    </span>
+
+                    <small>
+                        {{ post.created }}
+                    </small>
+                </div>
+
+            </div>
+
+
+            {% if post.image %}
+
+            <img
+                src="{{ post.image.url }}"
+                class="post_image"
+            >
+
+            {% endif %}
+
+
+            <div class="post_body">
+
+                <p>
+                    {{ post.description|truncatewords:25 }}
+                </p>
+
+            </div>
+
+
+            <div class="post_actions">
+
+                <div class="like-count-box">
+                    <span class="post-like">
+                            <img src="{% static 'svg/like.svg' %}">
+                            <span>{{ post.total_likes }}</span>
+                    </span>
+                </div>
+
+
+                <a href="{{ post.get_absolute_url }}">
+                    مشاهده پست
+                </a>
+
+            </div>
+
+        </div>
+
+
+        {% empty %}
+
+        <p>
+            هنوز پستی ثبت نشده است.
+        </p>
+
+
+        {% endfor %}
+
+
+    </section>
+
+    <aside class="right_sidebar">
+
+    <div class="sidebar_box">
+
+        <h3>
+            کاربران پیشنهادی
+        </h3>
+
+        {% for user in suggested_users %}
+
+            <div class="suggest_user">
+
+                    <a href="{% url 'social:user_detail' user.username %}" class="suggest_user">
+
+                        {% if user.photo %}
+                            <img src="{{ user.photo.url }}" class="suggest_image">
+                            {% else %}
+                            <img src="{% static 'images/profile/male-user-avatar-flat-design-profile-icon-modern-vector-illustration-features-faceless-man-dark-hair-beard-406163258.webp' %}" class="suggest_image">
+                        {% endif %}
+
+                        <span>
+                            {{ user.username }}
+                        </span>
+                    </a>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <div class="sidebar_box">
+
+    <h3>
+        ترندها
+    </h3>
+
+    <div class="trends">
+
+        {% for tag in popular_tags %}
+                <a href="{% url 'social:post_list_by_tag' tag.slug %}">
+    #{{ tag.name }}
+</a>
+        {% empty %}
+
+            <p>
+                ترندی وجود ندارد
+            </p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+
+</aside>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+
+{% block title %}
+    نتایج جستجو
+{% endblock %}
+
+
+{% block content %}
+<div class="search-results">
+
+    {% for post in result %}
+        <div class="search-card">
+
+            <h3 class="search-title">
+                {{ post.description|truncatewords:15 }}
+            </h3>
+
+            <p class="search-meta">
+                توسط {{ post.author.get_full_name }}
+            </p>
+
+            <a href="{{ post.get_absolute_url }}" class="search-btn">
+                مشاهده پست
+            </a>
+
+        </div>
+    {% empty %}
+        <p class="no-result">نتیجه‌ای پیدا نشد.</p>
+    {% endfor %}
+
+</div>
+{% endblock %}

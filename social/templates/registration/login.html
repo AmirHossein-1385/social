@@ -1,0 +1,65 @@
+{% extends 'parent/auth_base.html' %}
+
+{% block title %}
+Login
+{% endblock %}
+
+
+{% block content %}
+
+<div class="login_container">
+
+    <form method="post" class="login_form">
+
+        {% csrf_token %}
+
+        <h2 class="form_title">
+            Login Here
+        </h2>
+
+
+        <div class="login_content">
+
+            <label class="login_label">
+                نام کاربری یا شماره تلفن
+            </label>
+
+            <input
+                type="text"
+                class="login_input"
+                name="username"
+            >
+
+
+            <label class="login_label">
+                پسورد
+            </label>
+
+            <input
+                type="password"
+                class="login_input"
+                name="password"
+            >
+
+
+            <input
+                type="hidden"
+                name="next"
+                value="{{ next }}"
+            >
+            <span class="forgot-password">
+                <a href="{% url 'social:password_reset' %}">
+                    پسورد خود را فراموش کرده اید؟
+                </a>
+            </span>
+            <button type="submit" class="login_submit">
+                Submit
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

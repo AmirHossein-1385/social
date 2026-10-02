@@ -1,0 +1,109 @@
+{% extends 'parent/base.html' %}
+{% load thumbnail %}
+{% load static %}
+{% block content %}
+    <div class="profile-page">
+
+
+    <div class="profile-card">
+
+        <div class="profile-image">
+
+            {% if request.user.photo %}
+
+                <a href="{{ request.user.photo.url }}">
+                    <img src="{% thumbnail request.user.photo 150x0 quality=85 %}">
+                </a>
+
+            {% else %}
+
+                <img src="{% static 'images/profile/male-user-avatar-flat-design-profile-icon-modern-vector-illustration-features-faceless-man-dark-hair-beard-406163258.webp' %}">
+
+            {% endif %}
+
+        </div>
+
+
+        <div class="profile-info">
+
+            <h2>
+                {{ request.user.get_full_name }}
+            </h2>
+
+            <a class="ticket-btn" href="{% url 'social:show_tickets' %}">
+                تیکت های من
+            </a>
+            <span class="profile-activity-link">
+                <a href="{% url 'social:activity' %}">فعالیت های اخیر</a>
+            </span>
+
+        </div>
+
+
+
+          <div class="profile-follow">
+
+        <div>
+            <strong>{{ followers.count }}</strong>
+            <span>Followers</span>
+        </div>
+
+
+        <div>
+            <strong>{{ following.count }}</strong>
+            <span>Following</span>
+        </div>
+
+    </div>
+
+    </div>
+
+
+
+    <div class="saved-posts">
+
+        <h2>
+            پست های ذخیره شده
+        </h2>
+
+
+        {% for post in saved_posts %}
+
+
+            <div class="saved-post-card">
+
+                <a href="{% url 'social:post_detail' post.id %}">
+                    {{ post.description|truncatewords:20 }}
+                </a>
+
+
+                <div class="saved-post-meta">
+
+                    <span>
+                        {{ post.created }}
+                    </span>
+
+                    <span>
+                        {{ post.author }}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        {% empty %}
+
+            <p>
+                هنوز پستی ذخیره نکرده‌اید
+            </p>
+
+
+        {% endfor %}
+
+
+    </div>
+
+
+</div>
+{% endblock %}

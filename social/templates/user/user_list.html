@@ -1,0 +1,37 @@
+{% extends 'parent/base.html' %}
+{% load thumbnail %}
+{% load static %}
+
+{% block content %}
+<div class="users-list">
+
+    {% for user in users %}
+        <div class="user-card">
+
+            <a href="{{ user.get_absolute_url }}" class="user-image">
+
+                {% if user.photo %}
+
+                    <img src="{% thumbnail user.photo 100x0 quality=90 %}">
+
+                {% else %}
+
+                    <img src="{% static 'images/profile/male-user-avatar-flat-design-profile-icon-modern-vector-illustration-features-faceless-man-dark-hair-beard-406163258.webp' %}">
+
+                {% endif %}
+
+            </a>
+
+
+            <a href="{{ user.get_absolute_url }}" class="user-name">
+                {{ user.get_full_name }}
+            </a>
+
+
+        </div>
+
+
+    {% endfor %}
+
+</div>
+{% endblock %}

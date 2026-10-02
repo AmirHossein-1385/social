@@ -1,0 +1,70 @@
+{% extends 'parent/base.html' %}
+
+{% block title %}
+تیکت‌های من
+{% endblock %}
+
+
+{% block content %}
+
+<div class="tickets-container">
+
+    <div class="tickets-header">
+        <h1>تیکت‌های من</h1>
+        <p>پیام‌ها و پاسخ‌های ارسال شده</p>
+    </div>
+
+
+    <div class="tickets-list">
+
+        {% for ticket in tickets %}
+
+        <div class="ticket-card">
+
+            <div class="ticket-user">
+
+                <div class="ticket-label">
+                    شما
+                </div>
+
+                <p>
+                    {{ ticket.message }}
+                </p>
+
+            </div>
+
+
+            {% if ticket.reply %}
+
+            <div class="ticket-admin">
+
+                <div class="ticket-label">
+                    ادمین
+                </div>
+
+                <p>
+                    {{ ticket.reply }}
+                </p>
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
+
+        {% empty %}
+
+        <div class="empty-ticket">
+            هنوز تیکتی ارسال نکرده‌اید.
+        </div>
+
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

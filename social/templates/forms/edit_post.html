@@ -1,0 +1,14 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title %}Edit post{% endblock %}
+{% block content %}
+<div class="form-container">
+    <form method="post" class="custom-form">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit" class="submit-btn">ثبت</button>
+    </form>
+</div>
+{% endblock %}
