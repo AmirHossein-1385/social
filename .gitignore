@@ -12,9 +12,6 @@ __pycache__/
 db.sqlite3
 *.sqlite3
 
-# User Uploaded Files
-images/
-media/
 
 # Environment Variables
 .env
