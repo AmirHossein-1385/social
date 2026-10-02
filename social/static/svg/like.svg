@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="40" height="40">
+    <defs>
+        <linearGradient id="likeGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#ff6b81"></stop>
+            <stop offset="100%" stop-color="#e63950"></stop>
+        </linearGradient>
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="3" flood-opacity="0.25"></feDropShadow>
+        </filter>
+    </defs>
+
+    <path d="M32 56s-4-3.6-14.5-13.2C9.2 35.2 4 29.5 4 22.5
+        C4 14.5 10.3 8 18.2 8
+        C23 8 27.2 10.6 32 15.5
+        C36.8 10.6 41 8 45.8 8
+        C53.7 8 60 14.5 60 22.5
+        C60 29.5 54.8 35.2 46.5 42.8
+        C36 52.4 32 56 32 56Z" fill="url(#likeGradient)" filter="url(#shadow)"></path>
+
+    <path d="M18 18c-3 1-5 4-5 7" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.7"></path>
+</svg>

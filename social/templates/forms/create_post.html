@@ -1,0 +1,10 @@
+<div class="post-form-container">
+    <h1>ایجاد پست</h1>
+    <p>اطلاعات پست خود را وارد کنید.</p>
+    <form method="post" enctype="multipart/form-data" class="post-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="ثبت پست" class="post-submit">
+    </form>
+</div>
+

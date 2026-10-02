@@ -1,0 +1,90 @@
+{% extends 'parent/base.html' %}
+{% load thumbnail %}
+{% load static %}
+
+{% block content %}
+
+<div class="following-container">
+
+    <div class="following-header">
+        <div>
+            <h2>دنبال‌شونده‌ها</h2>
+            <p>افرادی که شما دنبال می‌کنید</p>
+        </div>
+
+        <span class="following-count">
+            {{ following|length }}
+        </span>
+    </div>
+
+    {% if following %}
+
+        <div class="following-grid">
+
+            {% for person in following %}
+
+                <div class="following-card">
+
+                    <a href="{{ person.get_absolute_url }}" class="following-info">
+
+                        <div class="following-avatar">
+
+                            {% if person.photo %}
+                                <img src="{% thumbnail person.photo 120x120 crop %}"
+                                     alt="{{ person.get_full_name }}">
+                            {% else %}
+                                <div class="default-avatar">
+                                    {{ person.get_full_name|first|upper }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="following-details">
+
+                            <h3>
+                                {{ person.get_full_name }}
+                            </h3>
+
+                            {% if person.username %}
+                                <span>@{{ person.username }}</span>
+                            {% endif %}
+
+                        </div>
+
+                    </a>
+
+                    <a href="{{ person.get_absolute_url }}"
+                       class="view-profile-btn">
+                        مشاهده پروفایل
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="empty-following">
+
+            <div class="empty-icon">
+                ♡
+            </div>
+
+            <h3>هنوز کسی را دنبال نمی‌کنید</h3>
+
+            <p>
+                افرادی که دنبال می‌کنید در این قسمت نمایش داده می‌شوند.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
+

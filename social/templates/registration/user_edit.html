@@ -1,0 +1,47 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="profile-edit-container">
+
+
+    <div class="profile-edit-header">
+
+        <h1>
+            ویرایش پروفایل
+        </h1>
+
+        <p>
+            اطلاعات حساب کاربری خود را به‌روزرسانی کنید
+        </p>
+
+    </div>
+
+
+
+    <form method="POST" enctype="multipart/form-data" class="profile-edit-form">
+
+        {% csrf_token %}
+
+
+        <div class="form-fields">
+
+            {{ user_form.as_p }}
+
+        </div>
+
+
+
+        <button type="submit" class="profile-save-btn">
+            ذخیره تغییرات
+        </button>
+
+
+    </form>
+
+
+</div>
+
+
+{% endblock %}

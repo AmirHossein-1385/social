@@ -1,0 +1,47 @@
+{% extends 'parent/base.html' %}
+{% load static %}
+{% block title%}activity{% endblock %}
+{% block content %}
+<div class="activity-container">
+
+    <h1 class="activity-title">
+        Activity
+    </h1>
+
+
+    <div class="activity-list">
+
+        {% for action in actions %}
+
+            <div class="activity-card">
+
+                <div class="activity-action">
+                    {{ action.action }}
+                </div>
+
+
+                <div class="activity-target">
+                    {{ action.target }}
+                </div>
+
+
+                <div class="activity-date">
+                    {{ action.created }}
+                </div>
+
+            </div>
+
+
+        {% empty %}
+
+            <div class="activity-empty">
+                فعالیتی در 24 ساعت گذشته انجام ندادید
+            </div>
+
+        {% endfor %}
+
+
+    </div>
+
+</div>
+{% endblock %}

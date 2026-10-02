@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="40" height="40">
+    <defs>
+        <linearGradient id="commentGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#4facfe"></stop>
+            <stop offset="100%" stop-color="#00c6fb"></stop>
+        </linearGradient>
+
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="3" flood-opacity="0.25"></feDropShadow>
+        </filter>
+    </defs>
+
+    <path d="M32 6C16.5 6 4 16.3 4 29c0 7.2 4.2 13.7 11 18.2L12 58l13.8-7.2c2 .3 4.1.5 6.2.5 15.5 0 28-10.3 28-22.3S47.5 6 32 6Z" fill="url(#commentGradient)" filter="url(#shadow)"></path>
+
+    <circle cx="22" cy="29" r="3" fill="white"></circle>
+    <circle cx="32" cy="29" r="3" fill="white"></circle>
+    <circle cx="42" cy="29" r="3" fill="white"></circle>
+</svg>
