@@ -213,7 +213,31 @@ Potential areas for future development include:
 - Production deployment and monitoring.
 
 ---
+## Screenshots
 
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Post Detail
+![Post Detail](screenshots/post%20detail.png)
+
+### Ticket
+![Ticket](screenshots/ticket.png)
+
+### Profile
+![Profile](screenshots/profile.png)
+
+### User Information
+![User Information](screenshots/user%20information.png)
+
+### Others' Profiles
+![Others' Profiles](screenshots/others_profiles.png)
+
+### Saved Posts
+![Saved Posts](screenshots/saved%20posts.png)
+
+### User Activities
+![User Activities](screenshots/user%20activities.png)
 ## 👨‍💻 Developer
 
 **AmirHossein Taghipour**
